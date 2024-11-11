@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="modal.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans"
-      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
   </head>
   <body>
@@ -20,13 +19,17 @@
         <img alt="logo" src="Logo.png" width="auto" height="auto" />
       </div>
       <div class="main-navbar">
-        <a href="#" class="active"><span>Accueil</span></a>
-        <a href="#"><span>Détails de l'évènement</span></a>
+        <a href="#" class="active"><span>Détails de l'évènement</span></a>
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a>
-        <a href="javascript:void(0);" class="icon" onclick="editNav()">
-          <i class="fa fa-bars"></i>
+        <a
+          href="javascript:void(0);"
+          id="burger"
+          class="icon"
+          onclick="editNav()"
+        >
+          <i class="fa-regular fa-bars"></i>
         </a>
       </div>
     </div>
@@ -52,54 +55,69 @@
       <div class="bground">
         <div class="content">
           <span class="close"></span>
-          <div class="modal-body">
-            <form name="reserve" action="index.html" method="get">
-              <div class="formData">
-                <label for="first">Prénom</label><br />
+
+          <div id="modal-body">
+            <form
+              id="form"
+              name="reserve"
+              action="index.html"
+              method="get"
+              novalidate
+            >
+              <div
+                class="formData"
+                data-error="Veuillez renseigner un prénom."
+                data-error-1="Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+              >
+                <label class="formData_label" for="first">Prénom</label><br />
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                  required
                 /><br />
               </div>
-              <div class="formData">
-                <label for="last">Nom</label><br />
+              <div
+                class="formData"
+                data-error="Veuillez renseigner un nom."
+                data-error-1="Veuillez entrer 2 caractères ou plus pour le champ du nom."
+              >
+                <label class="formData_label" for="last">Nom</label><br />
                 <input
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"
-                  required
                 /><br />
               </div>
-              <div class="formData">
-                <label for="email">E-mail</label><br />
+              <div class="formData" data-error="Adresse e-mail non valide.">
+                <label class="formData_label" for="email">E-mail</label><br />
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                  required
                 /><br />
               </div>
-              <div class="formData">
-                <label for="birthdate">Date de naissance</label><br />
+              <div
+                class="formData"
+                data-error="Vous devez entrer votre date de naissance."
+              >
+                <label class="formData_label" for="birthdate"
+                  >Date de naissance</label
+                ><br />
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  oninvalid="this.setCustomValidity('Vous devez entrer votre date de naissance.')"
-                  oninput="setCustomValidity('')"
-                  required
                 /><br />
               </div>
-              <div class="formData">
-                <label for="quantity"
+              <div
+                class="formData"
+                data-error="Veuillez renseigner le nombre de tournois auxquels vous avez déjà participer."
+              >
+                <label class="formData_label" for="quantity" id="qty_label"
                   >À combien de tournois GameOn avez-vous déjà participé
                   ?</label
                 ><br />
@@ -110,115 +128,104 @@
                   name="quantity"
                   min="0"
                   max="99"
-                  required
                 />
               </div>
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ?
               </p>
-              <div class="formData">
-                <input
-                  id="input_verif_ville"
-                  class="input_verif"
-                  type="checkbox"
-                  required="required"
-                />
+              <div
+                class="formData"
+                id="location"
+                data-error="Vous devez choisir une option."
+              >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location1"
                   name="location"
                   value="New York"
+                  id="location1"
                 />
                 <label class="checkbox-label" for="location1">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   New York</label
                 >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location2"
                   name="location"
                   value="San Francisco"
+                  id="location2"
                 />
                 <label class="checkbox-label" for="location2">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   San Francisco</label
                 >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location3"
                   name="location"
                   value="Seattle"
+                  id="location3"
                 />
                 <label class="checkbox-label" for="location3">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   Seattle</label
                 >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location4"
                   name="location"
                   value="Chicago"
+                  id="location4"
                 />
                 <label class="checkbox-label" for="location4">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   Chicago</label
                 >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location5"
                   name="location"
                   value="Boston"
+                  id="location5"
                 />
                 <label class="checkbox-label" for="location5">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   Boston</label
                 >
                 <input
                   class="checkbox-input checkbox_ville"
                   type="radio"
-                  id="location6"
                   name="location"
                   value="Portland"
+                  id="location6"
                 />
                 <label class="checkbox-label" for="location6">
-                  <span class="checkbox-icon"></span>
+                  <span class="checkbox-icon opt"></span>
                   Portland</label
                 >
               </div>
 
-              <div class="formData">
-                <input
-                  id="input_verif_cond"
-                  class="input_verif"
-                  type="checkbox"
-                  required
-                />
-                <input
-                  class="checkbox-input checkbox_cond"
-                  type="checkbox"
-                  id="checkbox1"
-                />
+              <div
+                class="formData"
+                id="checks"
+                data-error="Vous devez vérifier que vous acceptez les termes et conditions."
+              >
+                <input class="checkbox-input" type="checkbox" id="checkbox1" />
                 <label
                   class="checkbox2-label"
                   for="checkbox1"
                   id="checkbox1label"
-                  required
                 >
-                  <span class="checkbox-icon"></span>
+                  <span id="checkbox1icon" class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
-                <br />
+
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
-                <br />
               </div>
               <input
                 class="btn-submit"
@@ -227,6 +234,15 @@
                 value="C'est parti"
               />
             </form>
+          </div>
+          <div id="validation-ctn">
+            <span class="validation-message">Merci pour votre inscription</span>
+            <input
+              id="fermer"
+              class="btn-valid button"
+              type="submit"
+              value="Fermer"
+            />
           </div>
         </div>
       </div>
