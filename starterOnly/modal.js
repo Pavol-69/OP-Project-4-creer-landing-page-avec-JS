@@ -78,7 +78,6 @@ myForm.addEventListener("submit", (e) => {
     verifOptions() &&
     verifConditions()
   ) {
-    console.log("toto");
     validationInscription();
   }
 });
